@@ -1,0 +1,135 @@
+*{
+  box-sizing:border-box;
+  font-style:sans-serif;
+}
+
+body{
+  background: #3C73B9;
+}
+select{
+  text-decoration:none;
+}
+button{
+  display: block;
+  margin-top: 20px;
+  height:100px;
+  width:50%;
+  font-size:20px;
+  box-shadow: 5px 5px 3px  #888888;
+}
+button:hover{
+  background:#44DDEB;
+  padding:0;
+  border:none;
+}
+#header{
+  background:#4B5560;
+  margin: 10px 20%;
+}
+h1{
+  text-align:center;
+}
+#result{
+  background: #93A4B5;
+  margin-top :20px;
+  padding: 30px;
+  width: 250px;
+  border:2px solid black;
+}
+img{
+  width:250px; 
+  background:#5B5A58;
+  padding:10px;
+  border:2px solid black;
+  margin-top:20px;
+}
+#imgContainer{
+  position:relative;
+  height:150px; 
+}
+#first{
+  position:absolute;
+  left:79px;
+  bottom:25%;
+  height:38%;
+  width:13px;
+  opacity:0;
+/*   transition: .5s all ease; */
+  border:1px solid black;
+  border-radius: 5px 6px 6px 5px;
+}
+#second{ 
+  position:absolute;
+  left:96px;
+  bottom:27%;
+  height:51px;
+  width:13px;
+  opacity:0;
+/*   transition: .5s all ease; */
+  border:1px solid black;
+  border-radius: 0px 6px 8px 0px;
+}
+#third{
+  position:absolute;
+  left:113px;
+  bottom:29%;
+  height:45px;
+  width:12px;
+  opacity:0;
+/*   transition: .5s all ease; */
+  border:1px solid black;
+  border-radius: 0px 0px 0px 0px;
+}
+#fourth{
+  position:absolute;
+  left:147px;
+  bottom:26.5%;
+  height:54px;
+  width:14px;
+  background:red;
+  opacity:0;
+/*   transition: .5s all ease; */
+  border:1px solid black;
+  border-radius: 10px 2px 4px 7px;  
+}
+#leftColumn{
+  display:inline-block;
+  margin-left:20%;
+  width:30%;
+}
+#rightColumn{
+  display:inline-block;
+  vertical-align:top;
+  float:right;
+  margin-right:20%;
+  width:30%;
+}
+
+
+@media screen and (max-width: 1000px) { 
+  #leftColumn{
+    margin:10px 5%;
+    width:50%;
+  }
+  #rightColumn{
+    margin:10px 5%;
+    width:30%;
+
+
+  }
+}
+
+
+@media screen and (max-width: 700px) { 
+  #leftColumn{
+    display:block;
+    margin:10px auto;
+    width:50%;
+  }
+  #rightColumn{
+    display:block;
+    margin:10px auto;
+    float: none;
+    width:50%;
+  }
+}
