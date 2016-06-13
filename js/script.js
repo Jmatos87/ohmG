@@ -11,8 +11,12 @@ var img2 = document.querySelector('#second')
 var img3 = document.querySelector('#third')
 var img4 = document.querySelector('#fourth')
 
+var plusMinusSymbol = '&#177'
+var ohmSymbol = '&#8486'
+
 //This object houses the key-value pairs that the calculator will read from.
-var solutionObj = {
+
+var bandColorMap = {
   firstBand:{
     None:'stop',
     Brown:1,
@@ -52,11 +56,11 @@ var solutionObj = {
     Silver:.01
   },
   fourthBand:{
-    None:'&#177 20%',
-    Brown:'&#177 1%',
-    Red:'&#177 2%',
-    Gold:'&#177 5%',
-    Silver:'&#177 10%'
+    None:20,
+    Brown:1,
+    Red:2,
+    Gold:5,
+    Silver:10
   } 
 }
 
@@ -66,7 +70,7 @@ String.prototype.splice = function(start, delCount, newSubStr) {
         return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
     };
 
-var convertNumber = function(number){
+var formatNumberToString = function(number){
   var string = '' + number
   if(number>10){
     if(string.length===2){
@@ -101,46 +105,57 @@ var convertNumber = function(number){
   }
 }
 
-var changeTheBand = function (element,color){
+var bandImageChange = function (element,color){
   element.style.opacity = 1
   element.style.background = color
 }
 
-var makeMath = function (){
+var getOhmAndTolerance = function (){
   //To represent user's band color choices
-  var user1 = val1.value
-  var user2 = val2.value
-  var user3 = val3.value
-  var user4 = val4.value
-  //This gets the above color to get the corresponding numerical value
-  var firstBandVal = solutionObj.firstBand[user1] 
-  var secondBandVal = solutionObj.secondBand[user2]
-  var thirdBandVal = solutionObj.thirdBand[user3]
-  var fourthBandVal = solutionObj.fourthBand[user4]
+  var firstBandColor = val1.value
+  var secondBandColor = val2.value
+  var thirdBandColor = val3.value
+  var fourthBandColor = val4.value
+
   
   //This is to prevent the user from submitting an incomplete equation
-  if(user1==='None'||user2==='None'||user3==='None'){
+  if(firstBandColor==='None'||secondBandColor==='None'||thirdBandColor==='None'){
     alert('Please input a color in the first three bands')
   }
 
-  else{
-  //The calculations
+  else {
   
-  var step1 = firstBandVal * 10
-  var step2 = step1 + secondBandVal
-  var step3 = step2 * thirdBandVal
-  var s3 = convertNumber(step3)
-  var step4 = s3 + '&#8486 ' + fourthBandVal + ' Tolerance'
-  //This is to alter the resistor image with div color overlays representing the user's band choices
-  changeTheBand(img1,user1)
-  changeTheBand(img2,user2)
-  changeTheBand(img3,user3)
-  changeTheBand(img4,user4)
+    // The calculations 
+    var ohms = calculateOhmResistance(firstBandColor, secondBandColor, thirdBandColor, fourthBandColor);
+    var formattedOhms = formatNumberToString(ohms.ohmValue);
+    var formattedResistance = formattedOhms + ohmSymbol + ' ' + plusMinusSymbol + ' ' + ohms.tolerance + '% Tolerance';
+
+    // This is to alter the resistor image with div color overlays representing the user's band choices
+    bandImageChange(img1,firstBandColor)
+    bandImageChange(img2,secondBandColor)
+    bandImageChange(img3,thirdBandColor)
+    bandImageChange(img4,fourthBandColor)
   
  //This is to write to the solution box 
-  result.innerHTML = '<p>' + step4 + '</p>'
+    result.innerHTML = '<p>' + formattedResistance + '</p>'
   
   } 
 }
 
-button.addEventListener('click',makeMath)
+function calculateOhmResistance(bandAColor, bandBColor, bandCColor, bandDColor) {
+  var outputObj = {}
+
+  var ohms = ((bandColorMap.firstBand[bandAColor] * 10) + bandColorMap.secondBand[bandBColor]) * bandColorMap.thirdBand[bandCColor]
+  outputObj.ohmValue = ohms
+
+  var tolerance = bandColorMap.fourthBand[bandDColor]
+  outputObj.tolerance = tolerance
+
+  return outputObj
+}
+
+
+
+
+
+button.addEventListener('click',getOhmAndTolerance)

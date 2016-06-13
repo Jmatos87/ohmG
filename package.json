@@ -1,0 +1,26 @@
+{
+  "name": "breaking-ohms",
+  "version": "1.0.0",
+  "description": "ohm resistance calculator",
+  "main": "./js/script.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jmatos87/ohmG.git"
+  },
+  "keywords": [
+    "science"
+  ],
+  "author": "jmatos87",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jmatos87/ohmG/issues"
+  },
+  "homepage": "https://github.com/Jmatos87/ohmG#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
